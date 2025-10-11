@@ -1,0 +1,33 @@
+.users-container {
+    width: 100%;
+    height: calc(100vh - 5rem);
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+    /* outline: 2px solid red; */
+    box-sizing: border-box;
+    background-color: #2C3335;
+}
+
+.left-container {
+    flex: 0.70;
+    height: 100%;
+    border: 1px solid #ccc;
+    padding: 16px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-container {
+    flex: 0.30;
+    height: 100%;
+    border: 1px solid #ccc;
+    padding: 16px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
