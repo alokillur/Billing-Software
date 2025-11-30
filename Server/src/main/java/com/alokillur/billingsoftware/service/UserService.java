@@ -11,7 +11,7 @@ public interface UserService {
 
     String getUserRole(String email);
 
-    List<UserResponse> readUSeres();
+    List<UserResponse> readUsers();
 
     void deleteUSer(String userId);
 }
