@@ -6,9 +6,11 @@ import com.alokillur.billingsoftware.io.UserResponse;
 import com.alokillur.billingsoftware.repository.UserRepository;
 import com.alokillur.billingsoftware.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,6 +25,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse createUser(UserRequest userRequest) {
+        if(userRepository.existsByEmail(userRequest.getEmail())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already exists!");
+        }
         UserEntity newUser = convertToEntity(userRequest);
         newUser = userRepository.save(newUser);
         return convertToResponse(newUser);
@@ -57,7 +62,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserResponse> readUSeres() {
+    public List<UserResponse> readUsers() {
         return userRepository.findAll()
                 .stream()
                 .map(user -> convertToResponse(user))
