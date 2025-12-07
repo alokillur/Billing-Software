@@ -4,7 +4,9 @@ import com.alokillur.billingsoftware.entity.CategoryEntity;
 import com.alokillur.billingsoftware.io.CategoryRequest;
 import com.alokillur.billingsoftware.io.CategoryResponse;
 import com.alokillur.billingsoftware.repository.CategoryRepository;
+import com.alokillur.billingsoftware.repository.ItemRepository;
 import com.alokillur.billingsoftware.service.CategoryService;
+import com.alokillur.billingsoftware.service.FileUploadService;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import lombok.RequiredArgsConstructor;
@@ -21,21 +23,16 @@ import java.util.stream.Collectors;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
-    private final Cloudinary cloudinary;
+    private final FileUploadService fileUploadService;
+    private final ItemRepository itemRepository;
 
     @Override
     public CategoryResponse add(CategoryRequest request, MultipartFile imageFile) {
         CategoryEntity newCategory = convertToEntity(request);
 
-        if (imageFile != null && !imageFile.isEmpty()) {
-            try {
-                var uploadResult = cloudinary.uploader().upload(imageFile.getBytes(), ObjectUtils.emptyMap());
-                String imageUrl = (String) uploadResult.get("secure_url");
-                newCategory.setImgUrl(imageUrl);
-            } catch (Exception e) {
-                throw new RuntimeException("Image upload failed", e);
-            }
-        }
+        String imageUrl = fileUploadService.uploadFile(imageFile);
+        newCategory.setImgUrl(imageUrl);
+
         newCategory = categoryRepository.save(newCategory);
         return convertToResponse(newCategory);
     }
@@ -73,6 +70,7 @@ public class CategoryServiceImpl implements CategoryService {
                 .imgUrl(newCategory.getImgUrl())
                 .createdAt(newCategory.getCreatedAt())
                 .updatedAt(newCategory.getUpdatedAt())
+                .items(itemRepository.countByCategoryId(newCategory.getId()))
                 .build();
     }
 }
