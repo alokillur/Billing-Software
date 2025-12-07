@@ -29,7 +29,7 @@ public class CategoryController {
         return categoryService.add(request, imageFile);
     }
 
-    @GetMapping
+    @GetMapping("/categories")
     public List<CategoryResponse> fetchCategories() {
         return categoryService.read();
     }
