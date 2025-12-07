@@ -55,7 +55,7 @@ function CategoryList() {
                     </div>
                     <div className="flex-grow-1">
                       <h5 className='mb-1 text-black'>{category.name}</h5>
-                      <p className="mb-0 text-black">5 Items</p>
+                      <p className="mb-0 text-black">{category.items} Items</p>
                     </div>
                     <div>
                       <button className='btn btn-danger btn-sm' onClick={() => deleteByCategoryId(category.categoryId)}>
