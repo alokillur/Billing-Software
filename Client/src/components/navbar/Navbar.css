@@ -37,3 +37,7 @@
 .Link img {
     border-radius: 10px;
 }
+
+.profileIcon {
+    filter: brightness(0) invert(1);
+}
