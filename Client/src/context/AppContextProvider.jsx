@@ -5,6 +5,7 @@ import { fetchCategories } from '../service/CategoryService';
 function AppContextProvider({ children }) {
 
     const[categories, setCategories] = useState([]);
+    const[auth, setAuth] = useState({token: null, role: null});
 
     useEffect(() => {
         async function loadData() {
@@ -14,9 +15,14 @@ function AppContextProvider({ children }) {
         loadData();
     }, []);
 
+    const setAuthData = (token, role) => {
+        setAuth({token, role});
+    }
+
     const contextValue = {
         categories,
         setCategories,
+        setAuthData
     }
 
   return (
@@ -26,4 +32,4 @@ function AppContextProvider({ children }) {
   )
 }
 
-export default AppContextProvider
+export default AppContextProvider;
