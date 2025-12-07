@@ -55,4 +55,4 @@ function UserList({users, setUsers}) {
   )
 }
 
-export default UserList
+export default UserList;
