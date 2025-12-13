@@ -21,6 +21,8 @@
 .first-row {
     flex: 0.30;
     box-sizing: border-box;
+    overflow-y: auto;
+    min-height: 0; 
 }
 
 .horizontal-line {
@@ -32,6 +34,8 @@
 .second-row {
     flex: 0.70;
     box-sizing: border-box;
+    overflow-y: auto;
+    min-height: 0;
 }
 
 .right-column {
@@ -46,7 +50,7 @@
 }
 
 .cart-summary-container {
-    flex: o.30;
+    flex: 0.30;
     border-top: 1px solid white;
 }
 

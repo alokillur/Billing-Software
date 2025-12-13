@@ -6,33 +6,29 @@ function customerForm({customerName, setCustomerName, mobileNumber, setMobileNum
     <div>
       <div className="p-3">
         <div className="mb-3">
-          <div className="d-flex align-items-center gap-2">
-            <label htmlFor="customerName" className='col-4'>
-              Customer Name
-            </label>
-            <input type="text" className='form-control form-control-sm' id='customerName' value={customerName} onChange={(e) => setCustomerName(e.target.value)} />
-          </div>
+          <label htmlFor="customerName" className='form-label mb-1 text-white'>
+            Customer Name
+          </label>
+          <input type="text" className='form-control form-control-sm' id='customerName' value={customerName} onChange={(e) => setCustomerName(e.target.value)} />
         </div>
 
         <div className="mb-3">
-          <div className="d-flex align-items-center gap-2">
-            <label htmlFor="mobileNumber" className="col-4">
-              Mobile Number
-            </label>
+          <label htmlFor="mobileNumber" className="form-label mb-1 text-white">
+            Mobile Number
+          </label>
 
-            <input
-              type="tel"
-              inputMode="numeric"
-              className="form-control form-control-sm"
-              id="mobileNumber"
-              value={mobileNumber}
-              onChange={(e) => setMobileNumber(e.target.value)}
-              maxLength={10}
-              onInput={(e) => {
-                e.target.value = e.target.value.replace(/\D/g, "");
-              }}
-            />
-          </div>
+          <input
+            type="tel"
+            inputMode="numeric"
+            className="form-control form-control-sm"
+            id="mobileNumber"
+            value={mobileNumber}
+            onChange={(e) => setMobileNumber(e.target.value)}
+            maxLength={10}
+            onInput={(e) => {
+              e.target.value = e.target.value.replace(/\D/g, "");
+            }}
+          />
         </div>
 
       </div>
