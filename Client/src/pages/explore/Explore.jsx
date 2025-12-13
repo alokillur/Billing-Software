@@ -11,6 +11,8 @@ function Explore() {
 
   const { categories } = useContext(AppContext);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [customerName, setCustomerName] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
 
   return (
     <>
@@ -26,7 +28,7 @@ function Explore() {
         </div>
         <div className="right-column">
           <div className="customer-form-container" style={{height:'15%'}}>
-              <CustomerForm />
+              <CustomerForm customerName={customerName} setCustomerName={setCustomerName} mobileNumber={mobileNumber} setMobileNumber={setMobileNumber}/>
           </div>
           <hr className='my-3 text-light'/>
           <div className="cart-items-container" style={{height:'55%', overflowY:'auto'}}>
