@@ -6,7 +6,7 @@ function DisplayCategory({categories, selectedCategory, setSelectedCategory}) {
     <div>
       <div className="row g-3" style={{width:"100%" , margin:0}}>
         {categories.map((category) => (
-          <div key={category.categoryId} className="col-md-3 col-sm-6" style={{padding: '0 10px'}}>
+          <div key={category.categoryId} className="col-md-4 col-sm-6" style={{padding: '0 10px'}}>
             <Category category={category} 
             isSelected={selectedCategory === category.categoryId} 
             onclick={() => setSelectedCategory(category.categoryId)}/>

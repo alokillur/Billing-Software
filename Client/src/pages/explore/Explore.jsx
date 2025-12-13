@@ -21,7 +21,7 @@ function Explore() {
           </div>
           <hr className='horizontal-line'/>
           <div className="second-row">
-            <DisplayItems />
+            <DisplayItems selectedCategory={selectedCategory}/>
           </div>
         </div>
         <div className="right-column">
