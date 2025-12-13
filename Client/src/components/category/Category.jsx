@@ -9,8 +9,8 @@ function Category({category, isSelected, onclick}) {
         <div style={{position: 'relative', marginRight: '15px'}}>
           <img src={category.imgUrl} alt={category.name} className="category-image" />
         </div>
-        <div>
-          <h6 className="text-white mb-0">{category.name}</h6>
+        <div style={{minWidth: 0}}>
+          <h6 className="text-white mb-0 text-truncate" title={category.name}>{category.name}</h6>
           <p className='text-white mb-0'>{category.items} Items</p>
         </div> 
         {isSelected && <div className="active-category"></div>} 

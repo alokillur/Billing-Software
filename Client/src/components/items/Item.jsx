@@ -12,8 +12,8 @@ function Item({
                 <div style={{position: "relative", marginRight: "15px"}}>
                     <img src={itemImage} alt={itemName} className='item-image'/>
                 </div>
-                <div className='flex-grow-1 ms-2'>
-                    <h6 className='mb-1 text-light'>{itemName}</h6>
+                <div className='flex-grow-1 ms-2' style={{minWidth: 0}}>
+                    <h6 className='mb-1 text-light text-truncate' title={itemName}>{itemName}</h6>
                     <p className='mb-0 fw-bold text-light'>₹{itemPrice}</p>
                 </div>
 

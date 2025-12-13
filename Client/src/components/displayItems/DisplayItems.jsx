@@ -31,7 +31,7 @@ function DisplayItems({selectedCategory}) {
         </div>
         <div className="row g-3">
           {filteredItems.map((item, index) => (
-            <div key={index} className="col-md-4 col-sm-6">
+            <div key={index} className="col-xxl-4 col-xl-6 col-lg-12 col-md-12 col-sm-12">
               <Item 
               itemName = {item.name}
               itemPrice = {item.price}
