@@ -31,7 +31,7 @@ function Explore() {
               <CustomerForm customerName={customerName} setCustomerName={setCustomerName} mobileNumber={mobileNumber} setMobileNumber={setMobileNumber}/>
           </div>
           <hr className='my-3 text-light'/>
-          <div className="cart-items-container flex-grow-1" style={{overflowY:'auto'}}>
+          <div className="cart-items-container flex-grow-1" style={{overflowY:'auto', minHeight: 0}}>
               <CartItems />
           </div>
           <div className="cart-summary-container flex-shrink-0">

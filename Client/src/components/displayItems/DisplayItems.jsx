@@ -2,7 +2,7 @@ import './DisplayItems.css';
 
 import { useContext, useState } from 'react';
 import AppContext from '../../context/AppContext';
-import Item from '../items/Item';
+import Item from '../item/Item';
 import SearchBox from '../searchBox/SearchBox';
 
 function DisplayItems({selectedCategory}) {
