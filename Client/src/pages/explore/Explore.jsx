@@ -35,7 +35,7 @@ function Explore() {
               <CartItems />
           </div>
           <div className="cart-summary-container flex-shrink-0">
-              <CartSummary />
+              <CartSummary customerName={customerName} setCustomerName={setCustomerName} mobileNumber={mobileNumber} setMobileNumber={setMobileNumber}/>
           </div>
         </div>
       </div>
