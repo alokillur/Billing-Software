@@ -1,4 +1,5 @@
 package com.alokillur.billingsoftware.io;
 
-public class PaymentMethod {
+public enum PaymentMethod {
+    CASH, UPI;
 }
