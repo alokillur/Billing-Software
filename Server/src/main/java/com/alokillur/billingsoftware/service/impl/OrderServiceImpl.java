@@ -2,10 +2,7 @@ package com.alokillur.billingsoftware.service.impl;
 
 import com.alokillur.billingsoftware.entity.OrderEntity;
 import com.alokillur.billingsoftware.entity.OrderItemEntity;
-import com.alokillur.billingsoftware.io.OrderRequest;
-import com.alokillur.billingsoftware.io.OrderResponse;
-import com.alokillur.billingsoftware.io.PaymentDetails;
-import com.alokillur.billingsoftware.io.PaymentMethod;
+import com.alokillur.billingsoftware.io.*;
 import com.alokillur.billingsoftware.repository.OrderEntityRepository;
 import com.alokillur.billingsoftware.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -93,5 +90,29 @@ public class OrderServiceImpl implements OrderService {
         return orderEntityRepository.findAllByOrderByCreatedAtDesc()
                 .stream().map(this::convertToResponse)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public OrderResponse verifyPayment(PaymentVerification request) {
+        OrderEntity existingOrder = orderEntityRepository.findByOrderId(request.getOrderId())
+                .orElseThrow(() -> new RuntimeException("Order not found!"));
+
+        if(!verifyRazorpaySignature(request.getRazorpayOrderId(), request.getRazorPaymentId(),
+                request.getRazorpaySignature())) {
+            throw new RuntimeException("Payment verification failed!");
+        }
+
+        PaymentDetails paymentDetails = existingOrder.getPaymentDetails();
+        paymentDetails.setRazorpayOrderId(request.getRazorpayOrderId());
+        paymentDetails.setRazorpayPaymentId(request.getRazorPaymentId());
+        paymentDetails.setRazorpaySignature(request.getRazorpaySignature());
+        paymentDetails.setStatus(PaymentDetails.PaymentStatus.COMPLETED);
+
+        existingOrder = orderEntityRepository.save(existingOrder);
+        return convertToResponse(existingOrder);
+    }
+
+    private boolean verifyRazorpaySignature(String razorpayOrderId, String razorPaymentId, String razorpaySignature) {
+        return true;
     }
 }

@@ -14,7 +14,7 @@ import java.util.Date;
 public class RazorpayOrderResponse {
     private String id;
     private String entity;
-    private String amount;
+    private Integer amount;
     private String currency;
     private String status;
     private Date created_at;
