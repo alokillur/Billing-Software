@@ -36,23 +36,62 @@ public class OrderServiceImpl implements OrderService {
         return convertToResponse(newOrder);
     }
 
-    private Object convertToOrderItemEntity(OrderRequest.OrderItemRequest orderItemRequest) {
+    private OrderItemEntity convertToOrderItemEntity(OrderRequest.OrderItemRequest orderItemRequest) {
+        return OrderItemEntity.builder().
+                itemId(orderItemRequest.getItemId())
+                .name(orderItemRequest.getName())
+                .price(orderItemRequest.getPrice())
+                .quantity(orderItemRequest.getQuantity())
+                .build();
     }
 
-    private OrderResponse convertToResponse(OrderEntity newOrder) {
+    private OrderResponse convertToResponse(OrderEntity request) {
+        return OrderResponse.builder()
+                .orderId(request.getOrderId())
+                .customerName(request.getCustomerName())
+                .phoneNumber(request.getPhoneNumber())
+                .subtotal(request.getSubtotal())
+                .tax(request.getTax())
+                .grandTotal(request.getGrandTotal())
+                .paymentMethod(request.getPaymentMethod())
+                .items(request.getItems().stream().map(this::convertToItemResponse).collect(Collectors.toList()))
+                .paymentDetails(request.getPaymentDetails())
+                .createdAt(request.getCreatedAt())
+                .build();
+    }
 
+    private OrderResponse.OrderItemResponse convertToItemResponse(OrderItemEntity orderItemEntity) {
+        return OrderResponse.OrderItemResponse.builder()
+                .itemId(orderItemEntity.getItemId())
+                .name(orderItemEntity.getName())
+                .price(orderItemEntity.getPrice())
+                .quantity(orderItemEntity.getQuantity())
+                .build();
     }
 
     private OrderEntity convertToOrderEntity(OrderRequest request) {
+        return OrderEntity.builder()
+                .customerName(request.getCustomerName())
+                .phoneNumber(request.getPhoneNumber())
+                .subtotal(request.getSubtotal())
+                .tax(request.getTax())
+                .grandTotal(request.getGrandTotal())
+                .paymentMethod(PaymentMethod.valueOf(request.getPaymentMethod()))
+                .build();
     }
 
     @Override
     public void deleteOrder(String OrderId) {
+        OrderEntity existingOrder = orderEntityRepository.findByOrderId(OrderId)
+                .orElseThrow(() -> new RuntimeException("Order not found!"));
 
+        orderEntityRepository.delete(existingOrder);
     }
 
     @Override
     public List<OrderResponse> getLatestOrders() {
-        return List.of();
+        return orderEntityRepository.findAllByOrderByCreatedAtDesc()
+                .stream().map(this::convertToResponse)
+                .collect(Collectors.toList());
     }
 }
