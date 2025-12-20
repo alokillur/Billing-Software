@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/navbar/navbar';
+import Navbar from './components/navbar/Navbar';
 import Dashboard from './pages/dashboard/Dashboard';
 import ManageCategory from './pages/manageCategory/ManageCategory';
 import ManageUsers from './pages/manageUsers/ManageUsers';
