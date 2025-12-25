@@ -36,6 +36,7 @@ public class OrderEntity {
     private PaymentDetails paymentDetails;
 
     @Enumerated(EnumType.STRING)
+    @Column(length = 25)
     private PaymentMethod paymentMethod;
 
     @PrePersist
