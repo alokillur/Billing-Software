@@ -10,6 +10,7 @@ import { createOrder } from "../../service/OrderService";
 import { createRazorpayOrder } from "../../service/PaymentService";
 import { AppConstants } from "../../utils/constants";
 import { verifyPayment } from "../../service/PaymentService";
+import ReceiptPopup from "../receiptPopup/ReceiptPopup";
 
 function CartSummary({
   customerName,
@@ -223,6 +224,12 @@ function CartSummary({
           {isProcessing ? "Processing..." : "Place Order"}
         </button>
       </div>
+      {showPopup && (
+        <ReceiptPopup orderDetails={{...orderDetails,
+          razorpayOrderId: orderDetails?.paymentDetails?.razorpayOrderId,
+          razorpayPaymentId: orderDetails?.paymentDetails?.razorpayPaymentId,
+        }} onClose={() => setShowPopup(false)} onPrint={handlePrintReceipt}/>
+      )}
     </div>
   );
 }
