@@ -1,4 +1,5 @@
 import "./ReceiptPopup.css";
+import "./Print.css";
 
 const ReceiptPopup = ({ orderDetails, onClose, onPrint }) => {
   const items = orderDetails?.cartItems || orderDetails?.items || [];

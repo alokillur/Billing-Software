@@ -37,7 +37,7 @@ function CartSummary({
     clearCart();
   };
 
-  const placedOrder = () => {
+  const placeOrder = () => {
     setShowPopup(true);
     clearAll();
   };
@@ -216,7 +216,7 @@ function CartSummary({
       <div className="d-flex gap-3 mt-3">
         <button
           className="btn btn-warning flex-grow-1"
-          onClick={placedOrder}
+          onClick={placeOrder}
           disabled={isProcessing || !orderDetails}
         >
           {isProcessing ? "Processing..." : "Place Order"}
