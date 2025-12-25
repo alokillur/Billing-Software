@@ -1,36 +1,20 @@
-import axios from "axios";
+import apiClient from "../api/apiClient";
 
 export const addUser = async (user) => {
-  return await axios.post(
-    `http://localhost:8080/api/v1.0/admin/register`,
-    user,
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
+  return await apiClient.post(
+    `/admin/register`,
+    user
   );
 };
 
 export const deleteUser = async(userId) => {
-    return await axios.delete(
-    `http://localhost:8080/api/v1.0/admin/user/${userId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
+    return await apiClient.delete(
+    `/admin/user/${userId}`
   );
 }
 
 export const fetchUsers = async () => {
-  return await axios.get(
-    "http://localhost:8080/api/v1.0/admin/users",
-
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    }
+  return await apiClient.get(
+    "/admin/users"
   );
 };
