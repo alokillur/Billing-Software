@@ -89,7 +89,8 @@ function CartSummary({
     setIsProcessing(true);
     try {
       const response = await createOrder(order);
-      const savedData = response.data;
+      const savedData = { ...order, ...response.data };
+      
       if (response.status === 201 && paymentMode === "CASH") {
         toast.success("Cash Received");
         setOrderDetails(savedData);
@@ -138,7 +139,7 @@ function CartSummary({
 
         const rzp = new window.Razorpay(options);
         rzp.on("payment failed", async (response) => {
-          await deleteOrderOnFailure(response.data.orderId);
+          await deleteOrderOnFailure(savedData.orderId);
           toast.error("Payment Failed");
           console.error(response.error.description);
         });
@@ -152,25 +153,22 @@ function CartSummary({
     }
   };
 
-  const verifyPaymentHandler = async (response, savedData) => {
+  const verifyPaymentHandler = async (razorpayResponse, savedData) => {
     const paymentData = {
-      razorpayOrderId: response.razorpay_order_id,
-      razorpayPaymentId: response.razorpay_payment_id,
-      razorpaySignature: response.razorpay_signature,
+      razorpayOrderId: razorpayResponse.razorpay_order_id,
+      razorpayPaymentId: razorpayResponse.razorpay_payment_id,
+      razorpaySignature: razorpayResponse.razorpay_signature,
       orderId: savedData.orderId,
     };
 
     try {
-      const response = await verifyPayment(paymentData);
-      if (response.status === 200) {
+      const verificationResponse = await verifyPayment(paymentData);
+      if (verificationResponse.status === 200) {
         toast.success("Payment Successful");
         setOrderDetails({
           ...savedData,
-          paymentDetails: {
-            razorpayOrderId: response.razorpayOrderId,
-            razorpayPaymentId: response.razorpayPaymentId,
-            razorpaySignature: response.razorpaySignature,
-          },
+          razorpayOrderId: paymentData.razorpayOrderId,
+          razorpayPaymentId: paymentData.razorpayPaymentId,
         });
       } else {
         toast.error("Payment Processing Failed");
@@ -225,10 +223,11 @@ function CartSummary({
         </button>
       </div>
       {showPopup && (
-        <ReceiptPopup orderDetails={{...orderDetails,
-          razorpayOrderId: orderDetails?.paymentDetails?.razorpayOrderId,
-          razorpayPaymentId: orderDetails?.paymentDetails?.razorpayPaymentId,
-        }} onClose={() => setShowPopup(false)} onPrint={handlePrintReceipt}/>
+        <ReceiptPopup
+          orderDetails={orderDetails}
+          onClose={() => setShowPopup(false)}
+          onPrint={handlePrintReceipt}
+        />
       )}
     </div>
   );
