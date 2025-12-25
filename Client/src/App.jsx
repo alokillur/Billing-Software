@@ -9,6 +9,7 @@ import Explore from './pages/explore/Explore';
 import { Toaster } from 'react-hot-toast';
 import Login from './pages/login/Login';
 import { useLocation } from 'react-router-dom';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 
 export default function App() {
   const location = useLocation();
@@ -17,13 +18,13 @@ export default function App() {
     {location.pathname !== '/login' && <Navbar />}
       <Toaster />
       <Routes>
-        <Route path='/' element={<Dashboard />} />
+        <Route path='/' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path='/login' element={<Login />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/category' element={<ManageCategory />} />
-        <Route path='/users' element={<ManageUsers />} />
-        <Route path='/items' element={<ManageItems />} />
-        <Route path='/explore' element={<Explore />} />
+        <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path='/category' element={<ProtectedRoute><ManageCategory /></ProtectedRoute>} />
+        <Route path='/users' element={<ProtectedRoute><ManageUsers /></ProtectedRoute>} />
+        <Route path='/items' element={<ProtectedRoute><ManageItems /></ProtectedRoute>} />
+        <Route path='/explore' element={<ProtectedRoute><Explore /></ProtectedRoute>} />
       </Routes>
     </>
   );

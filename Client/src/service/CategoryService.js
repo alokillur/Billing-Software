@@ -1,37 +1,22 @@
-import axios from "axios";
+import apiClient from "../api/apiClient";
 
 export const addCategory = async (formData) => {
-  const token = localStorage.getItem("token");
-  return axios({
+  return apiClient({
     method: 'POST',
-    url: "http://localhost:8080/api/v1.0/admin/categories",
+    url: "/admin/categories",
     data: formData,
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    }
   });
 };
 
 export const deleteCategory = async (categoryId) => {
-  return await axios.delete(
-    `http://localhost:8080/api/v1.0/admin/categories/${categoryId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    }
+  return await apiClient.delete(
+    `/admin/categories/${categoryId}`
   );
 };
 
 
 export const fetchCategories = async () => {
-  return await axios.get(
-    "http://localhost:8080/api/v1.0/categories",
-
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    }
+  return await apiClient.get(
+    "/categories"
   );
 };
