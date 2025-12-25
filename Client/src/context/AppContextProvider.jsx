@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import AppContext from "./AppContext";
 import { fetchCategories } from "../service/CategoryService";
 import { fetchItems } from "../service/ItemService";
+import { isTokenValid } from "../utils/authUtils";
 
 function AppContextProvider({ children }) {
   const [categories, setCategories] = useState([]);
@@ -28,13 +29,20 @@ function AppContextProvider({ children }) {
 
   useEffect(() => {
     async function loadData() {
-      if(localStorage.getItem("token") && localStorage.getItem("role")) {
-        setAuthData(localStorage.getItem("token"), localStorage.getItem("role"));
+      const token = localStorage.getItem("token");
+      const role = localStorage.getItem("role");
+
+      if (token && isTokenValid(token) && role) {
+        setAuthData(token, role);
+        try {
+          const response = await fetchCategories();
+          const itemResponse = await fetchItems();
+          setCategories(response.data);
+          setItems(itemResponse.data);
+        } catch (error) {
+          console.error("Error loading initial data:", error);
+        }
       }
-      const response = await fetchCategories();
-      const itemResponse = await fetchItems();
-      setCategories(response.data);
-      setItems(itemResponse.data);
     }
     loadData();
   }, []);
