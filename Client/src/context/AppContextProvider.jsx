@@ -52,6 +52,10 @@ function AppContextProvider({ children }) {
     setAuth({ token, role });
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+  }
+
   const contextValue = {
     categories,
     setCategories,
@@ -62,7 +66,7 @@ function AppContextProvider({ children }) {
     cartItems,
     updateQuantity,
     removeFromCart,
-    
+    clearCart    
   };
 
   return (
