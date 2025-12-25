@@ -3,10 +3,9 @@ import "./CartSummary.css";
 
 import { useContext } from "react";
 import AppContext from "../../context/AppContext";
-import { deleteOrder } from "../../service/OrderService";
+import { deleteOrder, createOrder } from "../../service/OrderService";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import { createOrder } from "../../service/OrderService";
 import { createRazorpayOrder } from "../../service/PaymentService";
 import { AppConstants } from "../../utils/constants";
 import { verifyPayment } from "../../service/PaymentService";
