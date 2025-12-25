@@ -81,7 +81,7 @@ function CartSummary({
       subTotal: totalAmount,
       tax: tax,
       grandTotal: grandTotal,
-      paymentMethod: paymentMode.toUpperCase().replace(/\s+/g, "_"),
+      paymentMethod: paymentMode.toUpperCase(),
       cartItems,
     };
 
