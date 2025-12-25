@@ -10,6 +10,7 @@ import { Toaster } from 'react-hot-toast';
 import Login from './pages/login/Login';
 import { useLocation } from 'react-router-dom';
 import ProtectedRoute from './components/auth/ProtectedRoute';
+import OrderHistory from './pages/orderHistory/OrderHistory';
 
 export default function App() {
   const location = useLocation();
@@ -25,6 +26,7 @@ export default function App() {
         <Route path='/users' element={<ProtectedRoute><ManageUsers /></ProtectedRoute>} />
         <Route path='/items' element={<ProtectedRoute><ManageItems /></ProtectedRoute>} />
         <Route path='/explore' element={<ProtectedRoute><Explore /></ProtectedRoute>} />
+        <Route path='/orders' element={<ProtectedRoute><OrderHistory /></ProtectedRoute>} />
       </Routes>
     </>
   );
