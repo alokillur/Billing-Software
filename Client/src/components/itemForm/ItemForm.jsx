@@ -103,6 +103,7 @@ function ItemForm() {
                     placeholder="Item Name"
                     onChange={onChangeHandler}
                     value={data.name}
+                    required
                   />
                 </div>
 
@@ -116,6 +117,7 @@ function ItemForm() {
                     className="form-control"
                     onChange={onChangeHandler}
                     value={data.categoryId}
+                    required
                   >
                     <option value="" disabled selected>
                       ---SELECT CATEGORY---
@@ -143,6 +145,7 @@ function ItemForm() {
                     placeholder="₹200.00"
                     onChange={onChangeHandler}
                     value={data.price}
+                    required
                   />
                 </div>
 

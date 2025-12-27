@@ -9,7 +9,7 @@ function customerForm({customerName, setCustomerName, mobileNumber, setMobileNum
           <label htmlFor="customerName" className='form-label mb-1 text-white'>
             Customer Name
           </label>
-          <input type="text" className='form-control form-control-sm' id='customerName' value={customerName} onChange={(e) => setCustomerName(e.target.value)} />
+          <input type="text" className='form-control form-control-sm' id='customerName' value={customerName} onChange={(e) => setCustomerName(e.target.value)} required/>
         </div>
 
         <div className="mb-3">
@@ -28,6 +28,7 @@ function customerForm({customerName, setCustomerName, mobileNumber, setMobileNum
             onInput={(e) => {
               e.target.value = e.target.value.replace(/\D/g, "");
             }}
+            required
           />
         </div>
 
