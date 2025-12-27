@@ -59,6 +59,7 @@ function AppContextProvider({ children }) {
   const contextValue = {
     categories,
     setCategories,
+    auth,
     setAuthData,
     items,
     setItems,
