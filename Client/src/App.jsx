@@ -12,6 +12,7 @@ import { useLocation } from 'react-router-dom';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import LoginRoute from './components/auth/LoginRoute';
 import OrderHistory from './pages/orderHistory/OrderHistory';
+import NotFound from './pages/notFound/NotFound';
 
 export default function App() {
   const location = useLocation();
@@ -31,6 +32,7 @@ export default function App() {
         <Route path='/login' element={<LoginRoute><Login /></LoginRoute>} />
         <Route path='/orders' element={<ProtectedRoute><OrderHistory /></ProtectedRoute>} />
         <Route path='/' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </>
   );
