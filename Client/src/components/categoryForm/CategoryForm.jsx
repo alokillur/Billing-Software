@@ -68,6 +68,7 @@ function CategoryForm() {
                                 className='form-control' 
                                 placeholder='Category Name'
                                 value={data.name}
+                                required
                                 onChange={onChangeHandler}/>
                             </div>
                             <div className="mb-3">
