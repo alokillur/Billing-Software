@@ -57,7 +57,7 @@ function CategoryList() {
             <div key={index} className="col-12">
               <div
                 className="card p-3 w-100"
-                style={{ backgroundColor: category.bgColor }}
+                style={{ backgroundColor: "#212529" }}
               >
                 <div className="d-flex align-items-center">
                   <div className="me-3">
@@ -68,8 +68,8 @@ function CategoryList() {
                     />
                   </div>
                   <div className="flex-grow-1">
-                    <h5 className="mb-1 text-black">{category.name}</h5>
-                    <p className="mb-0 text-black">{category.items} Items</p>
+                    <h5 className="mb-1 text-white">{category.name}</h5>
+                    <p className="mb-0 text-white">{category.items} Items</p>
                   </div>
                   <button
                     className="btn btn-danger btn-sm"
