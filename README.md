@@ -67,33 +67,17 @@ The backend API follows a RESTful architecture with a base context path of `/api
 - MySQL Server
 
 ### Backend Setup
-1. Create a file named `application.properties` in `Server/src/main/resources/`.
-2. Use the following skeleton and fill in your credentials:
+1. Create a file named `.env` in the `Server/` directory.
+2. Fill in your credentials in the `.env` file:
 
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/billingsoftware
-spring.datasource.username=root
-spring.datasource.password=your_password
-
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
-spring.jpa.show-sql=true
-
-server.servlet.context-path=/api/v1.0
-
-# Cloudinary Credentials
-cloudinary.cloud-name=your_cloud_name
-cloudinary.api-key=your_api_key
-cloudinary.api-secret=your_api_secret
-spring.servlet.multipart.max-file-size=50MB
-spring.servlet.multipart.max-request-size=50MB
-
-# JWT secret key
-jwt.secret.key=your_jwt_secret_key=your-key
-
-# Razorpay Credentials
-razorpay.key.id=your_razorpay_key_id=your-id
-razorpay.key.secret=your_razorpay_key_secret=your-secret
+```env
+DB_PASSWORD=your_password
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+JWT_SECRET_KEY=your_jwt_secret_key
+RAZORPAY_KEY_ID=your_razorpay_key_id
+RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 ```
 
 3. Run the Spring Boot application using Maven: `./mvnw spring-boot:run`
