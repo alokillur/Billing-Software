@@ -67,8 +67,35 @@ The backend API follows a RESTful architecture with a base context path of `/api
 - MySQL Server
 
 ### Backend Setup
-1. Configure your database in `application.properties`.
-2. Add your Cloudinary and Razorpay credentials.
+1. Create a file named `application.properties` in `Server/src/main/resources/`.
+2. Use the following skeleton and fill in your credentials:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/billingsoftware
+spring.datasource.username=root
+spring.datasource.password=your_password
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+spring.jpa.show-sql=true
+
+server.servlet.context-path=/api/v1.0
+
+# Cloudinary Credentials
+cloudinary.cloud-name=your_cloud_name
+cloudinary.api-key=your_api_key
+cloudinary.api-secret=your_api_secret
+spring.servlet.multipart.max-file-size=50MB
+spring.servlet.multipart.max-request-size=50MB
+
+# JWT secret key
+jwt.secret.key=your_jwt_secret_key=your-key
+
+# Razorpay Credentials
+razorpay.key.id=your_razorpay_key_id=your-id
+razorpay.key.secret=your_razorpay_key_secret=your-secret
+```
+
 3. Run the Spring Boot application using Maven: `./mvnw spring-boot:run`
 
 ### Frontend Setup
