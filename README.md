@@ -1,4 +1,4 @@
-# Billing Software - Full Stack Application
+# Billing Software
 
 A professional and robust Full Stack Billing Software built using **Spring Boot** (Backend) and **React.js** (Frontend). This application provides a complete solution for managing inventory, processing orders, handling payments, and monitoring business performance through a dashboard.
 
